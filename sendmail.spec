@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.15.2
-Release:       32
+Release:       33
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -72,8 +72,8 @@ scripts and tools for using with Sendmail.
 
 %package   -n libmilter
 Summary:   The sendmail milter library
-provides:  sendmail-milter
-obsoletes: sendmail-milter
+Provides:  sendmail-milter sendmail-devel = %{version}-%{release}
+Obsoletes: sendmail-milter sendmail-devel < 8.15.2-8
 
 %description -n libmilter
 The Sendmail Content Management API (Milter) is designed to allow third-party
@@ -470,6 +470,12 @@ exit 0
 
 
 %changelog
+* Sat Feb 29 2020 openEuler Buildteam <buildteam@openeuler.org> - 8.15.2-33
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:optimization the spec
+
 * Tue Dec 31 2019 openEuler Buildteam <buildteam@openeuler.org> - 8.15.2-32
 - Type:bugfix
 - ID:NA
