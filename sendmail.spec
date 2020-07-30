@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.15.2
-Release:       33
+Release:       34
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -50,6 +50,7 @@ Patch0016:     sendmail-8.15.2-smtp-session-reuse-fix.patch
 Patch0017:     sendmail-8.15.2-openssl-1.1.0-fix.patch
 Patch0018:     sendmail-8.15.2-format-security.patch
 Patch0019:     sendmail-8.15.2-openssl-1.1.0-ecdhe-fix.patch
+Patch0020:     sendmail-glibc-2.30.patch
 
 %description
 Sendmail is a general purpose internetwork email routing facility that
@@ -470,6 +471,12 @@ exit 0
 
 
 %changelog
+* Thu Jul 30 2020 gaihuiying <gaihuiying1@huawei.com> - 8.15.2-34
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:fix build fail with glibc new version
+
 * Sat Feb 29 2020 openEuler Buildteam <buildteam@openeuler.org> - 8.15.2-33
 - Type:bugfix
 - ID:NA
