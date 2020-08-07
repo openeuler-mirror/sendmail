@@ -54,7 +54,7 @@ index 11d92bb..2ab533d 100644
 @@ -466,6 +485,7 @@ mi_milteropen(conn, backlog, rmsocket, name)
  #if NETUNIX
  	    addr.sa.sa_family != AF_UNIX &&
- #endif /* NETUNIX */
+ #endif
 +	    addr.sa.sa_family != AF_UNSPEC &&
  	    setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (void *) &sockopt,
  		       sizeof(sockopt)) == -1)
@@ -72,7 +72,7 @@ index 11d92bb..2ab533d 100644
 @@ -818,7 +839,7 @@ mi_listener(conn, dbg, smfi, timeout, backlog)
  # ifdef BSD4_4_SOCKADDR
  		     cliaddr.sa.sa_len == 0 ||
- # endif /* BSD4_4_SOCKADDR */
+ # endif
 -		     cliaddr.sa.sa_family != L_family))
 +		     (L_family != AF_UNSPEC && cliaddr.sa.sa_family != L_family)))
  		{
