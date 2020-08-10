@@ -1,8 +1,8 @@
 diff --git a/cf/m4/cfhead.m4 b/cf/m4/cfhead.m4
-index 714a3ec..3fd6c1c 100644
+index 6d12e85..15af608 100644
 --- a/cf/m4/cfhead.m4
 +++ b/cf/m4/cfhead.m4
-@@ -260,7 +260,7 @@ ifdef(`MAIL_SETTINGS_DIR', , `define(`MAIL_SETTINGS_DIR', `/etc/mail/')')
+@@ -269,7 +269,7 @@ ifdef(`MAIL_SETTINGS_DIR', , `define(`MAIL_SETTINGS_DIR', `/etc/mail/')')
  define(`DATABASE_MAP_TYPE', `hash')
  
  # set up default values for options
@@ -12,10 +12,10 @@ index 714a3ec..3fd6c1c 100644
  define(`confFROM_LINE', `From $g $d')
  define(`confOPERATORS', `.:%@!^/[]+')
 diff --git a/sendmail/aliases.0 b/sendmail/aliases.0
-index cfdbe17..5ea4c28 100644
+index ba855d4..edb3b19 100644
 --- a/sendmail/aliases.0
 +++ b/sendmail/aliases.0
-@@ -63,7 +63,7 @@ DDEESSCCRRIIPPTTIIOONN
+@@ -63,7 +63,7 @@ ALIASES(5)                                                          ALIASES(5)
         the list of users defined in that file.
  
         This  is  only  the  raw  data file; the actual aliasing information is
@@ -47,26 +47,26 @@ index f09b49c..7b16db2 100644
  newaliases(1).  
  A 
 diff --git a/sendmail/newaliases.0 b/sendmail/newaliases.0
-index c77f401..e2a1670 100644
+index 49ff2b0..247a276 100644
 --- a/sendmail/newaliases.0
 +++ b/sendmail/newaliases.0
-@@ -10,7 +10,7 @@ SSYYNNOOPPSSIISS
+@@ -10,7 +10,7 @@ NEWALIASES(1)                                                    NEWALIASES(1)
  
- DDEESSCCRRIIPPTTIIOONN
-        NNeewwaalliiaasseess  rebuilds  the  random access data base for the mail aliases
+ [1mDESCRIPTION[0m
+        [1mNewaliases  [22mrebuilds  the  random access data base for the mail aliases
 -       file /etc/mail/aliases.  It must be run each time this file is  changed
 +       file /etc/aliases.  It must be run each time this file is  changed
         in order for the change to take effect.
  
-        NNeewwaalliiaasseess is identical to ``sendmail -bi''.
-@@ -22,7 +22,7 @@ DDEESSCCRRIIPPTTIIOONN
-        sseennddmmaaiill..
+        [1mNewaliases [22mis identical to ``sendmail -bi''.
+@@ -22,7 +22,7 @@ NEWALIASES(1)                                                    NEWALIASES(1)
+        [1msendmail.[0m
  
- FFIILLEESS
+ [1mFILES[0m
 -       /etc/mail/aliases   The mail aliases file
 +       /etc/aliases   The mail aliases file
  
- SSEEEE AALLSSOO
+ [1mSEE ALSO[0m
         aliases(5), sendmail(8)
 diff --git a/sendmail/newaliases.1 b/sendmail/newaliases.1
 index 59dc0de..9ba8752 100644
@@ -91,10 +91,10 @@ index 59dc0de..9ba8752 100644
  .SH SEE ALSO
  aliases(5), sendmail(8)
 diff --git a/sendmail/sendmail.0 b/sendmail/sendmail.0
-index 515d5f7..8236411 100644
+index 60ab1cd..5f3bf93 100644
 --- a/sendmail/sendmail.0
 +++ b/sendmail/sendmail.0
-@@ -434,10 +434,10 @@ FFIILLEESS
+@@ -434,10 +434,10 @@ SENDMAIL(8)                                                        SENDMAIL(8)
         are only approximations.
  
  

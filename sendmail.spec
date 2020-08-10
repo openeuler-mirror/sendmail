@@ -1,6 +1,6 @@
 Name:          sendmail
-Version:       8.15.2
-Release:       33
+Version:       8.16.1
+Release:       1
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -33,23 +33,19 @@ Provides:      MTA smtpdaemon server(smtp)
 Provides:      sendmail-cf
 Obsoletes:     sendmail-cf
 
-Patch0001:     sendmail-8.14.4-makemapman.patch
-Patch0003:     sendmail-8.14.9-pid.patch
-Patch0004:     sendmail-8.15.1-manpage.patch
-Patch0005:     sendmail-8.15.1-dynamic.patch
-Patch0006:     sendmail-8.13.0-cyrus.patch
-Patch0007:     sendmail-8.15.1-aliases_dir.patch
-Patch0009:     sendmail-8.14.9-noversion.patch
-Patch0010:     sendmail-8.15.2-localdomain.patch
-Patch0011:     sendmail-8.14.3-sharedmilter.patch
-Patch0012:     sendmail-8.15.2-switchfile.patch
-Patch0013:     sendmail-8.14.8-sasl2-in-etc.patch
-Patch0014:     sendmail-8.15.2-qos.patch
-Patch0015:     sendmail-8.15.2-libmilter-socket-activation.patch
-Patch0016:     sendmail-8.15.2-smtp-session-reuse-fix.patch
-Patch0017:     sendmail-8.15.2-openssl-1.1.0-fix.patch
-Patch0018:     sendmail-8.15.2-format-security.patch
-Patch0019:     sendmail-8.15.2-openssl-1.1.0-ecdhe-fix.patch
+Patch0:        sendmail-8.14.4-makemapman.patch
+Patch1:        sendmail-8.14.9-pid.patch
+Patch2:        sendmail-8.15.1-manpage.patch
+Patch3:        sendmail-8.16.1-dynamic.patch
+Patch4:        sendmail-8.13.0-cyrus.patch
+Patch5:        sendmail-8.16.1-aliases_dir.patch
+Patch6:        sendmail-8.14.9-noversion.patch
+Patch7:        sendmail-8.15.2-localdomain.patch
+Patch8:        sendmail-8.14.3-sharedmilter.patch
+Patch9:        sendmail-8.15.2-switchfile.patch
+Patch10:       sendmail-8.14.8-sasl2-in-etc.patch
+Patch11:       sendmail-8.16.1-qos.patch
+Patch12:       sendmail-8.15.2-libmilter-socket-activation.patch
 
 %description
 Sendmail is a general purpose internetwork email routing facility that
@@ -470,6 +466,12 @@ exit 0
 
 
 %changelog
+* Mon Aug 10 2020 gaihuiying <gaihuiying1@huawei.com> - 8.16.1-1
+- Type:requirement
+- ID:NA
+- SUG:NA
+- DESC:update sendmail to 8.16.1
+
 * Sat Feb 29 2020 openEuler Buildteam <buildteam@openeuler.org> - 8.15.2-33
 - Type:bugfix
 - ID:NA
