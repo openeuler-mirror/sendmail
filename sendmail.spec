@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       1
+Release:       2
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -21,7 +21,7 @@ Source13:      sendmail-etc-mail-local-host-names
 Source14:      sendmail-etc-mail-mailertable
 Source15:      sendmail-etc-mail-trusted-users
 
-BuildRequires: openssl-devel openldap-devel libdb-devel libnsl2-devel hesiod-devel
+BuildRequires: openssl-devel openldap-devel libdb-devel libnsl2-devel
 BuildRequires: cyrus-sasl-devel groff ghostscript m4 systemd setup >= 2.5.31-1
 Requires:      bash >= 2.0 setup >= 2.5.31-1 %{_sbindir}/saslauthd 
 Requires(pre): shadow-utils
@@ -94,9 +94,9 @@ cp devtools/M4/UNIX/library.m4 devtools/M4/UNIX/sharedlibrary.m4
 export CFLAGS="${RPM_OPT_FLAGS}"
 
 cat << EOF > config.m4
-define(\`confMAPDEF', \`-DNEWDB -DNIS -DHESIOD -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
+define(\`confMAPDEF', \`-DNEWDB -DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
 define(\`confOPTIMIZE', \`\`\`\`${RPM_OPT_FLAGS}'''')
-define(\`confLIBS', \`-lnsl -lhesiod -lcrypt -ldb -lresolv')
+define(\`confLIBS', \`-lnsl -lcrypt -ldb -lresolv')
 define(\`confSTDIR', \`%{_localstatedir}/log/mail')
 define(\`confLDOPTS', \`-Xlinker -z -Xlinker relro -Xlinker -z -Xlinker now')
 define(\`confMANOWN', \`root')
@@ -117,7 +117,7 @@ APPENDDEF(\`confLIBS', \`-pie')
 APPENDDEF(\`confLIBS', \`-lsasl2 -lcrypto')dnl
 APPENDDEF(\`confLIBS', \`-lldap -llber -lssl -lcrypto')dnl
 APPENDDEF(\`confENVDEF', \`-DNETINET6 -DHES_GETMAILHOST -DUSE_VENDOR_CF_PATH=1 -D_FFR_LINUX_MHNLi')dnl
-APPENDDEF(\`confENVDEF', \`-D_FFR_QOS -D_FILE_OFFSET_BITS=64 -DHESIOD_ALLOW_NUMERIC_LOGIN')dnl
+APPENDDEF(\`confENVDEF', \`-D_FFR_QOS -D_FILE_OFFSET_BITS=64')dnl
 APPENDDEF(\`confENVDEF', \`-DSASL=2')dnl
 APPENDDEF(\`confENVDEF', \`-D_FFR_MILTER_CHECK_REJECTIONS_TOO')dnl
 APPENDDEF(\`confMAPDEF', \`-DLDAPMAP -DLDAP_DEPRECATED')dnl
@@ -466,6 +466,12 @@ exit 0
 
 
 %changelog
+* Thu Aug 13 2020 gaihuiying <gaihuiying1@huawei.com> - 8.16.1-2
+- Type:requirement
+- ID:NA
+- SUG:NA
+- DESC:drop hesiod support
+
 * Mon Aug 10 2020 gaihuiying <gaihuiying1@huawei.com> - 8.16.1-1
 - Type:requirement
 - ID:NA
