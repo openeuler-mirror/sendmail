@@ -1,0 +1,92 @@
+diff --git a/sendmail/srvrsmtp.c b/sendmail/srvrsmtp.c
+index ba636a8..46c5356 100644
+--- a/sendmail/srvrsmtp.c
++++ b/sendmail/srvrsmtp.c
+@@ -159,6 +159,26 @@
+ #define SKIP_SPACE(s)	while (SM_ISSPACE(*s))	\
+ 				(s)++
+ 
++static inline void
++message1(fmt)
++       char *fmt;
++{
++       if (strchr(fmt, '%') == NULL)
++               message(fmt, NULL);
++       else
++               message("%s", fmt);
++}
++
++static inline void
++usrerr1(fmt)
++       char *fmt;
++{
++       if (strchr(fmt, '%') == NULL)
++               usrerr(fmt, NULL);
++       else
++               usrerr("%s", fmt);
++}
++
+ #if _FFR_EAI
+ /*
+ **  ADDR_IS_ASCII -- check whether an address is 100% printable ASCII
+@@ -638,13 +658,13 @@
+ 				bool tsave = QuickAbort;		\
+ 									\
+ 				QuickAbort = false;			\
+-				usrerr(response);			\
++				usrerr1(response);			\
+ 				QuickAbort = tsave;			\
+ 				e->e_sendqueue = NULL;			\
+ 				goto doquit;				\
+ 			}						\
+ 			else						\
+-				usrerr(response);			\
++				usrerr1(response);			\
+ 			break;						\
+ 									\
+ 		  case SMFIR_REJECT:					\
+@@ -1011,7 +1031,7 @@
+ 	else if (strncmp(nullserver, "421 ", 4) == 0)
+ 	{
+ 		/* Can't use ("%s", ...) due to message() requirements */
+-		message(nullserver);
++		message1(nullserver);
+ 		goto doquit;
+ 	}
+ 
+@@ -1953,7 +1973,7 @@
+ 					if (ISSMTPREPLY(nullserver))
+ 					{
+ 						/* Can't use ("%s", ...) due to usrerr() requirements */
+-						usrerr(nullserver);
++						usrerr1(nullserver);
+ 					}
+ 					else
+ 					{
+@@ -2561,7 +2581,7 @@
+ 					if (response != NULL)
+ 					{
+ 						/* Can't use ("%s", ...) due to usrerr() requirements */
+-						usrerr(response);
++						usrerr1(response);
+ 					}
+ 					else
+ 					{
+@@ -3800,7 +3820,7 @@
+ #endif
+ 
+ 			/* Can't use ("%s", ...) due to usrerr() requirements */
+-			usrerr(response);
++			usrerr1(response);
+ 			if (strncmp(response, "421 ", 4) == 0
+ 			    || strncmp(response, "421-", 4) == 0)
+ 			{
+@@ -3922,7 +3942,7 @@
+ 				(void) extenhsc(response + 4, ' ', e->e_enhsc);
+ #endif
+ 			/* Can't use ("%s", ...) due to usrerr() requirements */
+-			usrerr(response);
++			usrerr1(response);
+ 			if (strncmp(response, "421 ", 4) == 0
+ 			    || strncmp(response, "421-", 4) == 0)
+ 				rv = false;
