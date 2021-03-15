@@ -467,7 +467,7 @@ exit 0
 
 %changelog
 * Mon Mar 15 2021 Aichun Li <liaichun@huawei.com> - 8.16.1-4
-- Type:NA
+- Type:bugfix
 - ID:NA
 - SUG:NA
 - DESC:add ExecStartPost in sm-client.service
