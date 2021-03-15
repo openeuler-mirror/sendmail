@@ -15,6 +15,7 @@ ExecStartPre=/bin/chown smmsp:smmsp /run/sm-client.pid
 ExecStartPre=-/sbin/restorecon /run/sm-client.pid
 ExecStartPre=-/etc/mail/make
 ExecStart=/usr/sbin/sendmail -L sm-msp-queue -Ac $SENDMAIL_OPTS $SENDMAIL_OPTARG
+ExecStartPost=/usr/bin/sleep 0.1
 
 [Install]
 WantedBy=multi-user.target
