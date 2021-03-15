@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       3
+Release:       4
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -468,6 +468,12 @@ exit 0
 
 
 %changelog
+* Mon Mar 15 2021 Aichun Li <liaichun@huawei.com> - 8.16.1-4
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:add ExecStartPost in sm-client.service
+
 * Fri Jan 15 2021 gaihuiying <gaihuiying1@huawei.com> - 8.16.1-3
 - Type:requirement
 - ID:NA
