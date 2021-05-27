@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       4
+Release:       5
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -23,6 +23,7 @@ Source15:      sendmail-etc-mail-trusted-users
 
 BuildRequires: openssl-devel openldap-devel libdb-devel libnsl2-devel
 BuildRequires: cyrus-sasl-devel groff ghostscript m4 systemd setup >= 2.5.31-1
+BuildRequires: gcc
 Requires:      bash >= 2.0 setup >= 2.5.31-1 %{_sbindir}/saslauthd 
 Requires(pre): shadow-utils
 Requires(post): systemd systemd-sysv coreutils %{_sbindir}/alternatives openssl
@@ -466,6 +467,12 @@ exit 0
 
 
 %changelog
+* Thu May 27 2021 lijingyuan <lijingyuan3@huawei.com> - 8.16.1-5
+- Type:bugfix  
+- ID:NA  
+- SUG:NA  
+- DESC:Add the compilation dependency of gcc.
+
 * Mon Mar 15 2021 Aichun Li <liaichun@huawei.com> - 8.16.1-4
 - Type:bugfix
 - ID:NA
