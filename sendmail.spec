@@ -1,6 +1,6 @@
 Name:          sendmail
-Version:       8.16.1
-Release:       5
+Version:       8.17.1
+Release:       1
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -34,19 +34,19 @@ Provides:      MTA smtpdaemon server(smtp)
 Provides:      sendmail-cf
 Obsoletes:     sendmail-cf
 
-Patch0001:     sendmail-8.14.4-makemapman.patch
-Patch0003:     sendmail-8.14.9-pid.patch
-Patch0004:     sendmail-8.15.1-manpage.patch
-Patch0005:     sendmail-8.16.1-dynamic.patch
-Patch0006:     sendmail-8.13.0-cyrus.patch
-Patch0007:     sendmail-8.16.1-aliases_dir.patch
-Patch0009:     sendmail-8.14.9-noversion.patch
-Patch0010:     sendmail-8.15.2-localdomain.patch
-Patch0011:     sendmail-8.14.3-sharedmilter.patch
-Patch0012:     sendmail-8.15.2-switchfile.patch
-Patch0013:     sendmail-8.14.8-sasl2-in-etc.patch
-Patch0014:     sendmail-8.16.1-qos.patch
-Patch0015:     sendmail-8.15.2-libmilter-socket-activation.patch
+Patch0001:     backport-sendmail-8.14.4-makemapman.patch
+Patch0002:     backport-sendmail-8.14.9-pid.patch
+Patch0003:     backport-sendmail-8.17.1-manpage.patch
+Patch0004:     backport-sendmail-8.17.1-dynamic.patch
+Patch0005:     backport-sendmail-8.13.0-cyrus.patch
+Patch0006:     backport-sendmail-8.17.1-aliases_dir.patch
+Patch0007:     backport-sendmail-8.14.9-noversion.patch
+Patch0008:     backport-sendmail-8.17.1-localdomain.patch
+Patch0009:     backport-sendmail-8.14.3-sharedmilter.patch
+Patch0010:     backport-sendmail-8.17.1-switchfile.patch
+Patch0011:     backport-sendmail-8.17.1-sasl2-in-etc.patch
+Patch0012:     backport-sendmail-8.17.1-qos.patch
+Patch0013:     backport-sendmail-8.17.1-libmilter-socket-activation.patch
 
 %description
 Sendmail is a general purpose internetwork email routing facility that
@@ -102,7 +102,7 @@ define(\`confSTDIR', \`%{_localstatedir}/log/mail')
 define(\`confLDOPTS', \`-Xlinker -z -Xlinker relro -Xlinker -z -Xlinker now')
 define(\`confMANOWN', \`root')
 define(\`confMANGRP', \`root')
-define(\`confENVDEF', \`-I%{_includedir}/libdb -I/usr/kerberos/include -Wall -DXDEBUG=0')
+define(\`confENVDEF', \`-I%{_includedir}/libdb -I/usr/kerberos/include -Wall -DXDEBUG=0 -DHASFLOCK')
 define(\`confLIBDIRS', \`-L/usr/kerberos/%{_lib}')
 define(\`confMANMODE', \`644')
 define(\`confMAN1SRC', \`1')
@@ -467,6 +467,12 @@ exit 0
 
 
 %changelog
+* Fri Dec 24 2021 yanglu <yanglu72@huawei.com> - 8.17.1-1
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:update sendmail to 8.17.1
+
 * Thu May 27 2021 lijingyuan <lijingyuan3@huawei.com> - 8.16.1-5
 - Type:bugfix  
 - ID:NA  
