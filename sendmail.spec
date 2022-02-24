@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       5
+Release:       6
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -21,7 +21,7 @@ Source13:      sendmail-etc-mail-local-host-names
 Source14:      sendmail-etc-mail-mailertable
 Source15:      sendmail-etc-mail-trusted-users
 
-BuildRequires: openssl-devel openldap-devel libdb-devel libnsl2-devel
+BuildRequires: openssl-devel openldap-devel libnsl2-devel
 BuildRequires: cyrus-sasl-devel groff ghostscript m4 systemd setup >= 2.5.31-1
 BuildRequires: gcc
 Requires:      bash >= 2.0 setup >= 2.5.31-1 %{_sbindir}/saslauthd 
@@ -47,6 +47,8 @@ Patch0012:     sendmail-8.15.2-switchfile.patch
 Patch0013:     sendmail-8.14.8-sasl2-in-etc.patch
 Patch0014:     sendmail-8.16.1-qos.patch
 Patch0015:     sendmail-8.15.2-libmilter-socket-activation.patch
+Patch0016:     sendmail-8.15.2-openssl-1.1.0-fix.patch                                                                                                                   
+Patch0017:     sendmail-8.15.2-format-security.patch
 
 %description
 Sendmail is a general purpose internetwork email routing facility that
@@ -95,21 +97,21 @@ cp devtools/M4/UNIX/library.m4 devtools/M4/UNIX/sharedlibrary.m4
 export CFLAGS="${RPM_OPT_FLAGS}"
 
 cat << EOF > config.m4
-define(\`confMAPDEF', \`-DNEWDB -DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
+define(\`confMAPDEF', \`-DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
 define(\`confOPTIMIZE', \`\`\`\`${RPM_OPT_FLAGS}'''')
-define(\`confLIBS', \`-lnsl -lcrypt -ldb -lresolv')
+define(\`confLIBS', \`-lnsl -lcrypt -lresolv')
 define(\`confSTDIR', \`%{_localstatedir}/log/mail')
 define(\`confLDOPTS', \`-Xlinker -z -Xlinker relro -Xlinker -z -Xlinker now')
 define(\`confMANOWN', \`root')
 define(\`confMANGRP', \`root')
-define(\`confENVDEF', \`-I%{_includedir}/libdb -I/usr/kerberos/include -Wall -DXDEBUG=0')
+define(\`confENVDEF', \`-I/usr/kerberos/include -Wall -DXDEBUG=0')
 define(\`confLIBDIRS', \`-L/usr/kerberos/%{_lib}')
 define(\`confMANMODE', \`644')
 define(\`confMAN1SRC', \`1')
 define(\`confMAN5SRC', \`5')
 define(\`confMAN8SRC', \`8')
 define(\`STATUS_FILE', \`%{_localstatedir}/log/mail/statistics')
-define(\`confLIBSEARCH', \`db resolv 44bsd')
+define(\`confLIBSEARCH', \`resolv 44bsd')
 EOF
 #'
 
@@ -467,6 +469,12 @@ exit 0
 
 
 %changelog
+* Wed Feb 23 2022 xihaochen<xihaochen@h-partner.com> - 8.16.1-6
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:remove libdb dependency
+
 * Thu May 27 2021 lijingyuan <lijingyuan3@huawei.com> - 8.16.1-5
 - Type:bugfix  
 - ID:NA  
