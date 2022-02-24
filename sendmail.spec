@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.17.1
-Release:       2
+Release:       3
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -21,7 +21,7 @@ Source13:      sendmail-etc-mail-local-host-names
 Source14:      sendmail-etc-mail-mailertable
 Source15:      sendmail-etc-mail-trusted-users
 
-BuildRequires: openssl-devel openldap-devel libdb-devel libnsl2-devel
+BuildRequires: openssl-devel openldap-devel libnsl2-devel
 BuildRequires: cyrus-sasl-devel groff ghostscript m4 systemd setup >= 2.5.31-1
 BuildRequires: gcc
 Requires:      bash >= 2.0 setup >= 2.5.31-1 %{_sbindir}/saslauthd 
@@ -95,21 +95,21 @@ cp devtools/M4/UNIX/library.m4 devtools/M4/UNIX/sharedlibrary.m4
 export CFLAGS="${RPM_OPT_FLAGS}"
 
 cat << EOF > config.m4
-define(\`confMAPDEF', \`-DNEWDB -DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
+define(\`confMAPDEF', \`-DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
 define(\`confOPTIMIZE', \`\`\`\`${RPM_OPT_FLAGS}'''')
-define(\`confLIBS', \`-lnsl -lcrypt -ldb -lresolv')
+define(\`confLIBS', \`-lnsl -lcrypt -lresolv')
 define(\`confSTDIR', \`%{_localstatedir}/log/mail')
 define(\`confLDOPTS', \`-Xlinker -z -Xlinker relro -Xlinker -z -Xlinker now')
 define(\`confMANOWN', \`root')
 define(\`confMANGRP', \`root')
-define(\`confENVDEF', \`-I%{_includedir}/libdb -I/usr/kerberos/include -Wall -DXDEBUG=0 -DHASFLOCK')
+define(\`confENVDEF', \`-I/usr/kerberos/include -Wall -DXDEBUG=0 -DHASFLOCK')
 define(\`confLIBDIRS', \`-L/usr/kerberos/%{_lib}')
 define(\`confMANMODE', \`644')
 define(\`confMAN1SRC', \`1')
 define(\`confMAN5SRC', \`5')
 define(\`confMAN8SRC', \`8')
 define(\`STATUS_FILE', \`%{_localstatedir}/log/mail/statistics')
-define(\`confLIBSEARCH', \`db resolv 44bsd')
+define(\`confLIBSEARCH', \`resolv 44bsd')
 EOF
 #'
 
@@ -467,6 +467,12 @@ exit 0
 
 
 %changelog
+* Wed Feb 23 2022 xihaochen<xihaochen@h-partner.com> - 8.17.1-3
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:remove libdb dependency
+
 * Tue Feb 15 2022 gaihuiying <eaglegai@163.com> - 8.17.1-2
 - Type:bugfix
 - ID:NA
