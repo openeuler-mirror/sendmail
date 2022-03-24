@@ -1,5 +1,5 @@
 diff --git a/cf/cf/submit.mc b/cf/cf/submit.mc
-index b9dfb16..cb325cc 100644
+index 6e2b360..45df0e6 100644
 --- a/cf/cf/submit.mc
 +++ b/cf/cf/submit.mc
 @@ -22,6 +22,8 @@ define(`__OSTYPE__',`')dnl dirty hack to keep proto.m4 from complaining
@@ -12,10 +12,10 @@ index b9dfb16..cb325cc 100644
  dnl define(`confDIRECT_SUBMISSION_MODIFIERS',`C')dnl
  FEATURE(`use_ct_file')dnl
 diff --git a/cf/m4/proto.m4 b/cf/m4/proto.m4
-index 8c460ce..a68ab8d 100644
+index 6a7cf1c..fd54e87 100644
 --- a/cf/m4/proto.m4
 +++ b/cf/m4/proto.m4
-@@ -253,6 +253,9 @@ _OPTION(SevenBitInput, `confSEVEN_BIT_INPUT', `False')
+@@ -264,6 +264,9 @@ _OPTION(SevenBitInput, `confSEVEN_BIT_INPUT', `False')
  # 8-bit data handling
  _OPTION(EightBitMode, `confEIGHT_BIT_HANDLING', `pass8')
  
@@ -26,10 +26,10 @@ index 8c460ce..a68ab8d 100644
  _OPTION(AliasWait, `confALIAS_WAIT', `5m')
  
 diff --git a/sendmail/conf.c b/sendmail/conf.c
-index e9fa42c..fa64b11 100644
+index f1bc1b2..ca5dc85 100644
 --- a/sendmail/conf.c
 +++ b/sendmail/conf.c
-@@ -6614,6 +6614,10 @@ char	*FFRCompileOptions[] =
+@@ -6678,6 +6678,10 @@ char	*FFRCompileOptions[] =
  	/* Check to make sure key fields were read from qf */
  	"_FFR_QF_PARANOIA",
  #endif
@@ -41,10 +41,10 @@ index e9fa42c..fa64b11 100644
  	/* Allow QueueSortOrder per queue group. */
  /* XXX: Still need to actually use qgrp->qg_sortorder */
 diff --git a/sendmail/daemon.c b/sendmail/daemon.c
-index 19a9378..5561cf5 100644
+index 5b42e32..c4604f0 100644
 --- a/sendmail/daemon.c
 +++ b/sendmail/daemon.c
-@@ -124,6 +124,10 @@ static int	NDaemons = 0;			/* actual number of daemons */
+@@ -129,6 +129,10 @@ static int	NDaemons = 0;			/* actual number of daemons */
  
  static time_t	NextDiskSpaceCheck = 0;
  
@@ -55,7 +55,7 @@ index 19a9378..5561cf5 100644
  /*
  **  GETREQUESTS -- open mail IPC port and get requests.
  **
-@@ -1159,6 +1163,16 @@ opendaemonsocket(d, firsttime)
+@@ -1173,6 +1177,16 @@ opendaemonsocket(d, firsttime)
  			(void) setsockopt(d->d_socket, SOL_SOCKET,
  					  SO_KEEPALIVE, (char *)&on, sizeof(on));
  
@@ -72,7 +72,7 @@ index 19a9378..5561cf5 100644
  #ifdef SO_RCVBUF
  			if (d->d_tcprcvbufsize > 0)
  			{
-@@ -2688,6 +2702,16 @@ gothostent:
+@@ -2704,6 +2718,16 @@ gothostent:
  			return EX_TEMPFAIL;
  		}
  
@@ -90,7 +90,7 @@ index 19a9378..5561cf5 100644
  		if (ClientSettings[family].d_tcpsndbufsize > 0)
  		{
 diff --git a/sendmail/readcf.c b/sendmail/readcf.c
-index e6f6296..adb09da 100644
+index 47c9777..bb98dbf 100644
 --- a/sendmail/readcf.c
 +++ b/sendmail/readcf.c
 @@ -24,6 +24,7 @@ SM_RCSID("@(#)$Id: readcf.c,v 8.692 2013-11-22 20:51:56 ca Exp $")
@@ -101,7 +101,7 @@ index e6f6296..adb09da 100644
  #endif
  
  
-@@ -2917,8 +2918,8 @@ static struct optioninfo
+@@ -2983,8 +2984,8 @@ static struct optioninfo
  # define O_RCPTTHROTDELAY	0xe6
  	{ "BadRcptThrottleDelay",	O_RCPTTHROTDELAY,	OI_SAFE	},
  #endif
@@ -112,7 +112,7 @@ index e6f6296..adb09da 100644
  	{ "InetQoS",			O_INETQOS,	OI_NONE },
  #endif
  #if STARTTLS && _FFR_FIPSMODE
-@@ -2982,6 +2983,77 @@ static struct optioninfo
+@@ -3059,6 +3060,77 @@ static struct optioninfo
  	{ NULL,				'\0',		OI_NONE	}
  };
  
@@ -190,9 +190,9 @@ index e6f6296..adb09da 100644
  # define CANONIFY(val)
  
  # define SET_OPT_DEFAULT(opt, val)	opt = val
-@@ -4679,6 +4751,33 @@ setoption(opt, val, safe, sticky, e)
+@@ -4795,6 +4867,33 @@ setoption(opt, val, safe, sticky, e)
  		break;
- # endif
+ #endif
  
 +#ifdef O_INETQOS
 +	  case O_INETQOS:
@@ -225,10 +225,10 @@ index e6f6296..adb09da 100644
  		if (tTd(37, 1))
  		{
 diff --git a/sendmail/sendmail.h b/sendmail/sendmail.h
-index e6cf45d..7f5cf9f 100644
+index ae7ed3a..9e34dd9 100644
 --- a/sendmail/sendmail.h
 +++ b/sendmail/sendmail.h
-@@ -2566,6 +2566,15 @@ EXTERN SOCKADDR	ConnectOnlyTo;	/* override connection address (for testing) */
+@@ -2646,6 +2646,15 @@ EXTERN SOCKADDR	ConnectOnlyTo;	/* override connection address (for testing) */
  EXTERN SOCKADDR RealHostAddr;	/* address of host we are talking to */
  extern const SM_EXC_TYPE_T EtypeQuickAbort; /* type of a QuickAbort exception */
  

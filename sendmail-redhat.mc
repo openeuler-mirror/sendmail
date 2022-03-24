@@ -80,8 +80,8 @@ dnl define(`confINET_QOS', `AF11')dnl
 dnl FEATURE(delay_checks)dnl
 FEATURE(`no_default_msa', `dnl')dnl
 FEATURE(`smrsh', `/usr/sbin/smrsh')dnl
-FEATURE(`mailertable', `hash -o /etc/mail/mailertable.db')dnl
-FEATURE(`virtusertable', `hash -o /etc/mail/virtusertable.db')dnl
+dnl #FEATURE(`mailertable', `hash -o /etc/mail/mailertable.db')dnl
+dnl #FEATURE(`virtusertable', `hash -o /etc/mail/virtusertable.db')dnl
 FEATURE(redirect)dnl
 FEATURE(always_add_domain)dnl
 FEATURE(use_cw_file)dnl
@@ -103,7 +103,7 @@ dnl #
 dnl # The -t option will retry delivery if e.g. the user runs over his quota.
 dnl #
 FEATURE(local_procmail, `', `procmail -t -Y -a $h -d $u')dnl
-FEATURE(`access_db', `hash -T<TMPF> -o /etc/mail/access.db')dnl
+dnl #FEATURE(`access_db', `hash -T<TMPF> -o /etc/mail/access.db')dnl
 FEATURE(`blacklist_recipients')dnl
 EXPOSED_USER(`root')dnl
 dnl #

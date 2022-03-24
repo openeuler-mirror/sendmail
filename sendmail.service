@@ -13,6 +13,7 @@ EnvironmentFile=-/etc/sysconfig/sendmail
 ExecStartPre=-/etc/mail/make
 ExecStartPre=-/etc/mail/make aliases
 ExecStart=/usr/sbin/sendmail -bd $SENDMAIL_OPTS $SENDMAIL_OPTARG
+ExecStartPost=/usr/bin/sleep 0.1
 ExecReload=/usr/bin/kill -HUP $MAINPID
 # hack to allow async reload to complete, otherwise systemd may signal error
 ExecReload=/usr/bin/sleep 2
