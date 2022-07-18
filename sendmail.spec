@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       4
+Release:       5
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -24,6 +24,7 @@ Source15:      sendmail-etc-mail-trusted-users
 BuildRequires: openssl-devel openldap-devel libdb-devel libnsl2-devel
 BuildRequires: cyrus-sasl-devel groff ghostscript m4 systemd setup >= 2.5.31-1
 Requires:      bash >= 2.0 setup >= 2.5.31-1 %{_sbindir}/saslauthd 
+Requires:      procmail
 Requires(pre): shadow-utils
 Requires(post): systemd systemd-sysv coreutils %{_sbindir}/alternatives openssl
 Requires(preun): systemd %{_sbindir}/alternatives
@@ -466,6 +467,12 @@ exit 0
 
 
 %changelog
+* Mon Jul 18 2022 hanjinpeng <hanjinpeng@kylinos.cn> - 8.16.1-5
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:Add require procmail, Fix send mail error which no procmail command
+
 * Thu Feb 15 2022 gaihuiying <eaglegai@163.com> - 8.16.1-4
 - Type:bugfix
 - ID:NA
