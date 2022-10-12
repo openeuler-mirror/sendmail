@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       7
+Release:       8
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -21,7 +21,7 @@ Source13:      sendmail-etc-mail-local-host-names
 Source14:      sendmail-etc-mail-mailertable
 Source15:      sendmail-etc-mail-trusted-users
 
-BuildRequires: openssl-devel openldap-devel libnsl2-devel
+BuildRequires: openssl-devel openldap-devel libnsl2-devel gdbm-devel
 BuildRequires: cyrus-sasl-devel groff ghostscript m4 systemd setup >= 2.5.31-1
 Requires:      bash >= 2.0 setup >= 2.5.31-1 %{_sbindir}/saslauthd 
 Requires:      procmail
@@ -97,9 +97,9 @@ cp devtools/M4/UNIX/library.m4 devtools/M4/UNIX/sharedlibrary.m4
 export CFLAGS="${RPM_OPT_FLAGS}"
 
 cat << EOF > config.m4
-define(\`confMAPDEF', \`-DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
+define(\`confMAPDEF', \`-DNDBM -DNIS -DMAP_REGEX -DSOCKETMAP -DNAMED_BIND=1')
 define(\`confOPTIMIZE', \`\`\`\`${RPM_OPT_FLAGS}'''')
-define(\`confLIBS', \`-lnsl -lcrypt -lresolv')
+define(\`confLIBS', \`-lgdbm -lgdbm_compat -lnsl -lcrypt -lresolv')
 define(\`confSTDIR', \`%{_localstatedir}/log/mail')
 define(\`confLDOPTS', \`-Xlinker -z -Xlinker relro -Xlinker -z -Xlinker now')
 define(\`confMANOWN', \`root')
@@ -469,6 +469,12 @@ exit 0
 
 
 %changelog
+* Wed Oct 12 2022 yanglu<yanglu72@h-partners.com> - 8.16.1-8
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC: fix newaliases command error and postfix service start execption after sendmail install
+
 * Thu Aug 04 2022 yanglu <yanglu72@h-partners.com> - 8.16.1-7
 - Type:bugfix
 - ID:NA
