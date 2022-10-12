@@ -54,7 +54,7 @@ makealiasesdb() {
   if [ "$(readlink -e /usr/bin/newaliases)" = /usr/sbin/sendmail.sendmail ]
   then
     /usr/bin/newaliases > /dev/null
-    touch -r /etc/aliases.db aliasesdb-stamp 2> /dev/null
+    touch -r /etc/aliases.dir /etc/aliases.pag  aliasesdb-stamp 2> /dev/null
   else
     rm -f aliasesdb-stamp
   fi
