@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.16.1
-Release:       9
+Release:       10
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -344,7 +344,7 @@ if [ ! -f %{_sysconfdir}/pki/tls/certs/sendmail.pem ]; then
     fi
 
     %{_bindir}/openssl req -new -key %{_sysconfdir}/pki/tls/private/sendmail.key -x509 -sha256 \
-        -days 365 -set_serial $RANDOM -out %{_sysconfdir}/pki/tls/certs/sendmail.pem \
+        -days 730 -set_serial $RANDOM -out %{_sysconfdir}/pki/tls/certs/sendmail.pem \
         -subj "/C=--/ST=SomeState/L=SomeCity/O=SomeOrganization/OU=SomeOrganizationalUnit/CN=${FQDN}/emailAddress=root@${FQDN}"
     chmod 600 %{_sysconfdir}/pki/tls/certs/sendmail.pem
 fi
@@ -469,6 +469,12 @@ exit 0
 
 
 %changelog
+* Fri Mar 10 2023 xinghe <xinghe2@h-partners.com> - 8.16.1-10
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC: modify certificate validity period
+
 * Thu Dec 15 2022 xinghe <xinghe2@h-partners.com> - 8.16.1-9
 - Type:bugfix
 - ID:NA
