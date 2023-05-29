@@ -1,6 +1,6 @@
 Name:          sendmail
 Version:       8.17.1
-Release:       7
+Release:       8
 Summary:       A classic mail transfer agent from the Unix world
 License:       Sendmail
 URL:           http://www.sendmail.org/
@@ -47,6 +47,7 @@ Patch0010:     backport-sendmail-8.17.1-switchfile.patch
 Patch0011:     backport-sendmail-8.17.1-sasl2-in-etc.patch
 Patch0012:     backport-sendmail-8.17.1-qos.patch
 Patch0013:     backport-sendmail-8.17.1-libmilter-socket-activation.patch
+Patch0014:     support-specify-cc.patch
 
 %description
 Sendmail is a general purpose internetwork email routing facility that
@@ -467,6 +468,12 @@ exit 0
 
 
 %changelog
+* Mon Apr 17 2023 jammyjellyfish <jammyjellyfish255@outlook.com> - 8.17.1-8
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:Support specify CC
+
 * Fri Mar 10 2023 xinghe <xinghe2@h-partners.com> - 8.17.1-7
 - Type:bugfix
 - ID:NA

@@ -1,0 +1,12 @@
+diff -up sendmail-8.17.1/devtools/M4/header.m4.orig2 sendmail-8.17.1/devtools/M4/header.m4
+--- sendmail-8.17.1/devtools/M4/header.m4.orig2	2023-04-17 16:51:13.396073699 +0800
++++ sendmail-8.17.1/devtools/M4/header.m4	2023-04-17 16:51:35.632185100 +0800
+@@ -20,7 +20,7 @@ ifdef(`pushdef', `',
+ System V or GNU')
+ 	include(NoSuchFile)')
+ define(`confABI', `')
+-define(`confCC', `cc')
++define(`confCC', `syscmd(`printf $CC')')
+ define(`confSHELL', `/bin/sh')
+ define(`confBEFORE', `')
+ define(`confLIBDIRS', `')
